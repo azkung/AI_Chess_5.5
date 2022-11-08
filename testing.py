@@ -19,8 +19,11 @@ b = chess.Board('8/1Q1bbkpr/4pn2/7p/4PP2/1N4P1/Pq1BB2P/R4RK1 b - - 0 30')
 
 b = chess.Board()
 
-for s in chess.SQUARES:
-    print(s, b.piece_at(s))
+
+print(b)
+
+# for s in chess.SQUARES:
+#     print(s, b.piece_at(s))
 
 # WHITE_MODEL_PATH = os.path.dirname(os.path.realpath(__file__)) + '/models/WhitePieceSelector'
 # BLACK_MODEL_PATH = os.path.dirname(os.path.realpath(__file__)) + '/models/BlackPieceSelector'
