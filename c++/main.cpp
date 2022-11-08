@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+#include <iostream>
+#include <limits>
 #include "thc.h"
 
 void display_position( thc::ChessRules &cr, const std::string &description )
@@ -22,26 +24,76 @@ void display_position( thc::ChessRules &cr, const std::string &description )
     printf( "Position = %s\n", s.c_str() );
 }
 
+int minimax(thc::ChessRules &cr, int depth, float alpha, float beta) {
+    
+    thc::TERMINAL terminal;
+    cr.Evaluate(terminal);
+    if(terminal == thc::TERMINAL_BCHECKMATE){
+        return -1000;
+    }
+    else if(terminal == thc::TERMINAL_WCHECKMATE){
+        return 1000;
+    }
+    else if(terminal == thc::TERMINAL_WSTALEMATE || terminal == thc::TERMINAL_BSTALEMATE){
+        return 0;
+    }
+    else if(depth == 0){
+        return 0;
+    }
+    
+    
+    if(cr.WhiteToPlay()){
+        //maximizing player
+    }
+    else{
+        //minimizing player
+    }
+
+    return 0;
+}
+
+thc::Move bestMove(thc::ChessRules &cr, int depth) {
+    thc::Move mv;
+    std::vector<thc::Move> moves;
+    std::vector<bool> check;
+    std::vector<bool> mate;
+    std::vector<bool> stalemate;
+    cr.GenLegalMoveList(moves, check, mate, stalemate);
+    unsigned int len = moves.size();
+    int alpha = -1000000;
+    int beta = 1000000;
+    if(cr.WhiteToPlay()){
+        for(int i = 0; i < len; i++){
+            cr.PushMove(moves[i]);
+            int score = minimax(cr, depth-1, alpha, beta);
+            cr.PopMove(moves[i]);
+        }
+    } 
+    else {
+        for(int i = 0; i < len; i++){
+            cr.PushMove(moves[i]);
+            int score = minimax(cr, depth-1, alpha, beta);
+            cr.PopMove(moves[i]);
+        }
+    }
+    return mv;
+}
+
 int main()
 {
     // Example 1, Play a few good moves from the initial position
     thc::ChessRules cr;
-    display_position( cr, "Initial position" );
-    thc::Move mv;
-    mv.NaturalIn( &cr, "e4" );
-    cr.PlayMove(mv);
-    mv.NaturalIn( &cr, "e5" );
-    cr.PlayMove(mv);
-    mv.NaturalIn( &cr, "Nf3" );
-    cr.PlayMove(mv);
-    mv.NaturalIn( &cr, "Nc6" );
-    cr.PlayMove(mv);
-    mv.NaturalIn( &cr, "Bc4" );
-    cr.PlayMove(mv);
-    mv.NaturalIn( &cr, "Bc5" );
-    cr.PlayMove(mv);
-    display_position( cr, "Starting position of Italian opening, after 1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5" );
-    cr.PopMove(mv);
-    display_position( cr, "Pop" );
+    std::string input;
+
+    display_position(cr, "Initial position");
+    thc::TERMINAL terminal;
+    cr.Evaluate(terminal);
+    while(terminal == thc::NOT_TERMINAL){
+        thc::Move mv = bestMove(cr, 3);
+        cr.PushMove(mv);
+        cr.Evaluate(terminal);
+
+        std::cin >> input;
+    }
 }
 
