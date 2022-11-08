@@ -1,0 +1,3 @@
+[submodule "thc-chess-library"]
+	path = thc-chess-library
+	url = git@github.com:billforsternz/thc-chess-library.git
