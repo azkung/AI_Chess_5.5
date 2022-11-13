@@ -16,8 +16,8 @@ import multiprocessing
 
 global positions
 
-WHITE_MODEL_PATH = os.path.dirname(__file__) + '/../models/WhitePieceSelector'
-BLACK_MODEL_PATH = os.path.dirname(__file__) + '/../models/BlackPieceSelector'
+WHITE_MODEL_PATH = os.path.dirname(__file__) + '/../../models/WhitePieceSelector'
+BLACK_MODEL_PATH = os.path.dirname(__file__) + '/../../models/BlackPieceSelector'
 whiteNet = Net()
 blackNet = Net()
 
@@ -204,7 +204,7 @@ def AI(board : chess.Board, depth, alpha, beta, inf_depth):
 def bestMove(board: chess.Board):
     global positions
     positions = 0
-    score, bestMove = AI(board, 5, float('-inf'), float('inf'), 3)
+    score, bestMove = AI(board, 6, float('-inf'), float('inf'), 3)
     print(positions)
     if bestMove == None:
         for move in board.legal_moves:

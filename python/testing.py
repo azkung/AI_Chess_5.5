@@ -1,26 +1,35 @@
-from tools import board_to_np, square_to_row_col
-import chess
-import torch
-import torch.nn as nn
-from training.model import Net
-import random
-import os
-import numpy as np
-import bots.bot_middle as bot_middle
-import bots.bot_middle_new as bot_middle_new
-import bots.bot_net_traversal as bot_net_traversal
-import bots.bot_net_traversal_2 as bot_net_traversal_2 
-import bots.bot_attack as bot_attack 
+# from tools import board_to_np, square_to_row_col
+# import chess
+# import torch
+# import torch.nn as nn
+# from training.model import Net
+# import random
+# import os
+# import numpy as np
+# import bots.bot_middle as bot_middle
+# import bots.bot_middle_new as bot_middle_new
+# import bots.bot_net_traversal as bot_net_traversal
+# import bots.bot_net_traversal_2 as bot_net_traversal_2 
+# import bots.bot_attack as bot_attack 
 import bots.bot_basic as bot_basic 
-import bots.bot_custom as bot_custom 
+# import bots.bot_custom as bot_custom 
 import time
+import chess
+# import bots.bot_middle_new as bot_middle_new
 
-b = chess.Board('8/1Q1bbkpr/4pn2/7p/4PP2/1N4P1/Pq1BB2P/R4RK1 b - - 0 30')
+# b = chess.Board('8/1Q1bbkpr/4pn2/7p/4PP2/1N4P1/Pq1BB2P/R4RK1 b - - 0 30')
 
 b = chess.Board()
 
-
 print(b)
+
+s = time.perf_counter()
+m = bot_basic.bestMove(b)
+b.push(m)
+e = time.perf_counter()
+print(b)
+print(e-s)
+
 
 # for s in chess.SQUARES:
 #     print(s, b.piece_at(s))

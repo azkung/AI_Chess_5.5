@@ -12,7 +12,7 @@ def scoreCalcMiddleRush(board: chess.Board):
         if piece != None:
             c = square%8
             r = math.floor(square/8)
-            distanceFromCenter = math.sqrt(((c-4.5)**2) + ((r-4.5)**2))
+            distanceFromCenter = math.sqrt(((c-3.5)**2) + ((r-3.5)**2))
             
             if piece.piece_type == 1:
                 if piece.color == True:
@@ -123,7 +123,7 @@ def AI(board : chess.Board, depth, alpha, beta):
 def bestMove(board: chess.Board):
     global positions
     positions = 0
-    score, bestMove = AI(board, 4, float('-inf'), float('inf'))
+    score, bestMove = AI(board, 6, float('-inf'), float('inf'))
     print(positions)
     if bestMove == None:
         for move in board.legal_moves:

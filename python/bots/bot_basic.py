@@ -31,6 +31,8 @@ def scoreCalcBasic(board: chess.Board):
     
     return currentScore
 
+
+
 def scoreCalcBoard(board):
     return scoreCalcBasic(board)
 
@@ -65,10 +67,9 @@ def AI(board : chess.Board, depth, alpha, beta):
             score = AI(board, depth-1, alpha, beta)[0]
             board.pop()
             
-            previousMaxScore = maxScore
             maxScore = max(score, maxScore)
 
-            if maxScore != previousMaxScore:
+            if maxScore == score:
                 maxMove = move
                 
             alpha = max(alpha, score)
@@ -88,10 +89,9 @@ def AI(board : chess.Board, depth, alpha, beta):
             score = AI(board, depth-1, alpha, beta)[0]
             board.pop()
             
-            previousMinScore = minScore
             minScore = min(score, minScore)
 
-            if minScore != previousMinScore:
+            if minScore == score:
                 minMove = move 
             
             beta = min(beta, score)

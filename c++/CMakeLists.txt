@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(MyProject VERSION 5.5)
+project(Chess VERSION 5.5)
 
 
 add_executable(chess main.cpp)
